@@ -5,12 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>DIPY tutorial repository notebooks</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+    html {
+      height: 100%;
+    }
     body {
       font-family: sans-serif;
+      margin: 0;
       padding: 2rem;
       line-height: 1.6;
       text-align: center;
-      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
     h1 {
       color: #333;
@@ -25,11 +35,28 @@
     .notebook-link:hover {
       text-decoration: underline;
     }
+    footer {
+      font-size: 0.9rem;
+      color: #666;
+    }
+    footer a {
+      color: #0066cc;
+      text-decoration: none;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
-  <h1>DIPY tutorial repository notebooks</h1>
-  <a class="notebook-link" href="./reconstruct_with_q_sampling_imaging_notebook.html">Reconstruct with Generalized Q-Sampling Imaging</a>
-  <a class="notebook-link" href="./basic_tracking_notebook.html">Introduction to Basic Tracking</a>
+  <div>
+    <h1>DIPY tutorial repository notebooks</h1>
+    <a class="notebook-link" href="./reconstruct_with_q_sampling_imaging_notebook.html" target="_blank" rel="noopener noreferrer">Reconstruct with Generalized Q-Sampling Imaging</a>
+    <a class="notebook-link" href="./basic_tracking_notebook.html" target="_blank" rel="noopener noreferrer">Introduction to Basic Tracking</a>
+  </div>
+
+  <footer>
+    <a href="https://github.com/MadeInShineA/dipy-tutorial/tree/main" target="_blank" rel="noopener noreferrer">View source code on GitHub</a>
+  </footer>
 </body>
 </html>
