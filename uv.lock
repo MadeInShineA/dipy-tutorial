@@ -265,6 +265,7 @@ dependencies = [
     { name = "dipy" },
     { name = "fury" },
     { name = "marimo" },
+    { name = "numpy" },
 ]
 
 [package.metadata]
@@ -272,6 +273,7 @@ requires-dist = [
     { name = "dipy", specifier = ">=1.11.0" },
     { name = "fury", specifier = ">=0.11.0" },
     { name = "marimo", specifier = ">=0.18.0" },
+    { name = "numpy", specifier = ">=2.3.5" },
 ]
 
 [[package]]

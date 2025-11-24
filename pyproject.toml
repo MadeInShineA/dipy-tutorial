@@ -8,4 +8,5 @@ dependencies = [
     "dipy>=1.11.0",
     "fury>=0.11.0",
     "marimo>=0.18.0",
+    "numpy>=2.3.5",
 ]
