@@ -60,12 +60,54 @@ def _(get_fnames, gradient_table, load_nifti, read_bvals_bvecs):
 
     bvals, bvecs = read_bvals_bvecs(hardi_bval_fname, hardi_bvec_fname)
     gtab = gradient_table(bvals, bvecs=bvecs)
-    return data, gtab
+    return bvals, bvecs, data, gtab
 
 
 @app.cell
-def _(data):
+def _(bvals, bvecs, data):
     print(f"data.shape {data.shape}")
+    print(f"bvals.shape {bvals.shape}")
+    print(f"bvecs.shape {bvecs.shape}")
+    return
+
+
+@app.cell
+def _(mo):
+    mo.md(r"""
+    ## Display the first volume
+    """)
+    return
+
+
+@app.cell
+def _(Image, actor, bvals, data, np, window):
+    # Pick b=0 volume
+    b0_idx = np.where(bvals == 0)[0][0]
+    vol = data[:, :, :, b0_idx].astype(np.float32)
+
+    # Normalize for visualization (2–98 percentile)
+    p2, p98 = np.percentile(vol, (2, 98))
+    vol = np.clip(vol, p2, p98)
+    vol = (vol - p2) / (p98 - p2 + 1e-8)
+
+    # Create scene
+    raw_scene = window.Scene()
+
+    # Use slicer (shows 3 orthogonal planes)
+    slicer_actor = actor.slicer(vol)
+    raw_scene.add(slicer_actor)
+
+    # Optional: position the slice at center
+    slicer_actor.display(x=vol.shape[0] // 2, y=vol.shape[1] // 2, z=vol.shape[2] // 2)
+
+    # Save as PNG
+    print("Saving raw volume snapshot as res/raw_volume.png")
+    window.record(scene=raw_scene, out_path="./res/raw_volume.png", size=(600, 600))
+
+    # Render to NumPy array → PIL Image
+    img_array = window.snapshot(raw_scene, size=(600, 600))
+    img = Image.fromarray(img_array)
+    img
     return
 
 
